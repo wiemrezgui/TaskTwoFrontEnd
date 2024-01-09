@@ -21,10 +21,7 @@ navigateToEdit(id:any,str:any){
   getAllCourses() {
     this.taskservice.getAllCourses().subscribe(
       (response: Course[]) => {
-        this.courses = response;
-      },
-      (error: HttpErrorResponse) => {
-        console.log(error.message);
+        this.courses = response;        
       }
     );
   }
@@ -33,10 +30,7 @@ navigateToEdit(id:any,str:any){
     this.taskservice.deleteCourse(Number(id)).subscribe(
       (response: void) => {
         this.getAllCourses();
-      },
-      (error: HttpErrorResponse) => {
-        console.log(error.message);
-      },
+      }
 
     );
   }

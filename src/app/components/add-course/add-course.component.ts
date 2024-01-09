@@ -50,9 +50,6 @@ export class AddCourseComponent {
     this.taskservice.getAllCourses().subscribe(
       (response: Course[]) => {
         this.courses = response;
-      },
-      (error: HttpErrorResponse) => {
-        console.log(error.message);
       }
     );
   }
@@ -65,10 +62,7 @@ export class AddCourseComponent {
       (response: Course) => {
         console.log(response);
         this.getAllCourses();
-      },
-      (error: HttpErrorResponse) => {
-        console.log(error.message);
-      },
+      }
     );
 
   }

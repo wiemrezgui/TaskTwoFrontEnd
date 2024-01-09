@@ -24,7 +24,7 @@ export class EditCourseComponent {
   ngOnInit() {
     this.id=this.activatedrouter.snapshot.paramMap.get("id")
     if (this.id != null && this.id != undefined){
-      this.getCourseById()
+      this.getCourseById(this.id)
   }}
   public onFileChanged(event:any) {
     this.selectedFile = event.target.files[0];
@@ -33,7 +33,7 @@ export class EditCourseComponent {
     console.log(this.selectedFile);
     const uploadImageData = new FormData();
     uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
-      this.httpClient.post('http://localhost:8080/image/upload', uploadImageData, { observe: 'response' })
+      this.httpClient.post('http://localhost:8083/image/upload', uploadImageData, { observe: 'response' })
       .subscribe((response) => {
         if (response.status === 200) {
           this.message = 'Image uploaded successfully';
@@ -43,7 +43,7 @@ export class EditCourseComponent {
       }
       );}
       getImage() {
-        this.httpClient.get('http://localhost:8080/image/get/' + this.imageName)
+        this.httpClient.get('http://localhost:8083/image/get/' + this.imageName)
           .subscribe(
             res => {
               this.retrieveResonse = res;
@@ -52,19 +52,17 @@ export class EditCourseComponent {
             }
           );
       }
-  getCourseById(){
-    this.data=JSON.parse(localStorage.getItem("courses") || '[]')
-    for (let i = 0; i < this.data.length; i++) {
-      if (this.data[i].id ==this.id) {
-        this.obj=this.data[i]
-  }}}
+  getCourseById(id:any){
+  this.taskservice.getCourseById(id).subscribe(
+    (reponse:Course) =>{
+      this.obj=reponse
+    }
+  )  
+  }
   getAllCourses() {
     this.taskservice.getAllCourses().subscribe(
       (response: Course[]) => {
         this.courses = response;
-      },
-      (error: HttpErrorResponse) => {
-        console.log(error.message);
       }
     );
   }
@@ -77,10 +75,7 @@ export class EditCourseComponent {
       (response: Course) => {
         console.log(response);
         this.getAllCourses();
-      },
-      (error: HttpErrorResponse) => {
-        console.log(error.message);
-      },
+      }
     );
 
   }
