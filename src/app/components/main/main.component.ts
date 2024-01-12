@@ -15,8 +15,8 @@ constructor(private route:Router,private taskservice:TaskTwoService){}
 ngOnInit(){
   this.getAllCourses()
 }
-navigateToEdit(id:any,str:any){
-  this.route.navigate(['/'+str+'/'+id])
+Edit(id:any){
+  this.route.navigate(['/editCourse/'+id])
   }
   getAllCourses() {
     this.taskservice.getAllCourses().subscribe(

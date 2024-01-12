@@ -11,15 +11,13 @@
         </div>
         <div class="item">
             <label for="image">Course Image</label>
-            <input type="file" id="image" (change)="onFileChanged($event)">
-            <input type="button" (click)="onUpload()" value="upload">
+            <input type="file" id="image" multipe value="select" #selectfile (change)="onFileChanged($event)">
         </div>
         <div class="col-md-3">
-            <input type="button" (click)="getImage()" value="Get Image">
             <div class="container row">
                 <div class="col-md-16">
-                    <div *ngIf=retrievedImage>
-                        <img [src]="retrievedImage">
+                    <div *ngFor="let file of course.courseImages">
+                        <img [src]="file.url" width="100px" height="100px">
                     </div>
                 </div>
             </div>

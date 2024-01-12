@@ -1,6 +1,8 @@
+import { FileHandle } from "./file-handle.model";
+
 export interface Course{
-    id:number ;
+    id:string,
     name:string;
     price:number;
-    imagePath:string;
+    courseImages:FileHandle[]
 }

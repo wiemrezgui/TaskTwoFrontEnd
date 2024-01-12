@@ -8,15 +8,15 @@ import { Observable } from 'rxjs';
 })
 export class TaskTwoService {
 
-  private url = "http://localhost:8083/task";
+  private url = "http://localhost:8086/api/task";
   constructor(private http: HttpClient) { }
-  CreateCourse(CourseRequest: Course) {
+  addCourse(CourseRequest: FormData) {
     return this.http.post<Course>(this.url + "/create", CourseRequest);
   }
   getAllCourses() {
     return this.http.get<any>(this.url);
   }
-  getCourseById(id:any){
+  getCourseById(id:Number){
 return this.http.get<any>(this.url+`/${id}`)
   }
   public updateCourse(CourseRequest: Course): Observable<Course> {
